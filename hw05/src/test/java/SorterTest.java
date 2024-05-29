@@ -14,19 +14,212 @@ class SorterTest {
         randomGenerator = new Random(FIXED_RANDOMNESS_SEED);
     }
 
-    // @Test
-    // void testQuicksortOnSmallArrayWithNarrowRangeOfValues() {
-    //     Long[] array = randomArray(30, 100, 120);
-    //     Sorter.quickSort(array);
-    //     assertTrue(isSorted(array), "Quicksort did not sort the array");
-    // }
+    @Test
+    void testQuicksortOnSmallArrayWithNarrowRangeOfValues() {
+        Long[] array = randomArray(30, 100, 120);
+        Sorter.quickSort(array);
+        assertTrue(isSorted(array), "Quicksort did not sort the array");
+    }
 
-    // @Test
-    // void testMergeSortOnMediumArrayWithWideRangeOfValues() {
-    //     Long[] array = randomArray(1024, 0, 1_000_000);
-    //     Sorter.mergeSortNoRecursion(array);
-    //     assertTrue(isSorted(array), "Mergesort did not sort the array");
-    // }
+    @Test
+    void testMergeSortOnMediumArrayWithWideRangeOfValues() {
+        Long[] array = randomArray(1024, 0, 1_000_000);
+        Sorter.mergeSortNoRecursion(array);
+        assertTrue(isSorted(array), "Mergesort did not sort the array");
+    }
+
+    @Test
+    public void atestEmptyArray() {
+        Integer[] arr = {};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{}, arr);
+    }
+
+    @Test
+    public void atestSingleElementArray() {
+        Integer[] arr = {1};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1}, arr);
+    }
+
+    @Test
+    public void atestEvenLengthArray() {
+        Integer[] arr = {4, 3, 2, 1};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 2, 3, 4}, arr);
+    }
+
+    @Test
+    public void atestOddLengthArray() {
+        Integer[] arr = {3, 1, 4, 1, 5};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 1, 3, 4, 5}, arr);
+    }
+
+    @Test
+    public void atestArrayWithNegativeNumbers() {
+        Integer[] arr = {-3, -1, -4, -1, -5};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{-5, -4, -3, -1, -1}, arr);
+    }
+
+    @Test
+    public void atestArrayWithMixedPositiveAndNegativeNumbers() {
+        Integer[] arr = {3, -1, 4, -1, 5, -9};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{-9, -1, -1, 3, 4, 5}, arr);
+    }
+
+    @Test
+    public void atestArrayOfStrings() {
+        String[] arr = {"banana", "apple", "cherry"};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new String[]{"apple", "banana", "cherry"}, arr);
+    }
+
+    @Test
+    public void atestArrayWithDuplicateValues() {
+        Integer[] arr = {3, 1, 2, 3, 1, 2};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 1, 2, 2, 3, 3}, arr);
+    }
+
+    @Test
+    public void atestAlreadySortedArray() {
+        Integer[] arr = {1, 2, 3, 4, 5};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 2, 3, 4, 5}, arr);
+    }
+
+    @Test
+    public void atestReverseSortedArray() {
+        Integer[] arr = {5, 4, 3, 2, 1};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 2, 3, 4, 5}, arr);
+    }
+
+    @Test
+    public void testLargeArrayWithRandomIntegers() {
+        int size = 1000;
+        Integer[] arr = new Integer[size];
+        Integer[] expectedArr = new Integer[size];
+        Random rand = new Random();
+        for (int i = 0; i < size; i++) {
+            int num = rand.nextInt(10000) - 5000; // random integers between -5000 and 4999
+            arr[i] = num;
+            expectedArr[i] = num;
+        }
+        Arrays.sort(expectedArr);
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(expectedArr, arr);
+    }
+
+    @Test
+    public void testLargeArrayWithAllNegativeNumbers() {
+        int size = 1500;
+        Integer[] arr = new Integer[size];
+        Integer[] expectedArr = new Integer[size];
+        Random rand = new Random();
+        for (int i = 0; i < size; i++) {
+            int num = rand.nextInt(5000) - 5000; // random integers between -5000 and -1
+            arr[i] = num;
+            expectedArr[i] = num;
+        }
+        Arrays.sort(expectedArr);
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(expectedArr, arr);
+    }
+
+    @Test
+    public void testLargeArrayWithPositiveNumbers() {
+        int size = 2000;
+        Integer[] arr = new Integer[size];
+        Integer[] expectedArr = new Integer[size];
+        Random rand = new Random();
+        for (int i = 0; i < size; i++) {
+            int num = rand.nextInt(5000); // random integers between 0 and 4999
+            arr[i] = num;
+            expectedArr[i] = num;
+        }
+        Arrays.sort(expectedArr);
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(expectedArr, arr);
+    }
+
+
+    @Test
+    public void testEmptyArray() {
+        Integer[] arr = {};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{}, arr);
+    }
+
+    @Test
+    public void testSingleElementArray() {
+        Integer[] arr = {1};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1}, arr);
+    }
+
+    @Test
+    public void testEvenLengthArray() {
+        Integer[] arr = {4, 3, 2, 1};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 2, 3, 4}, arr);
+    }
+
+    @Test
+    public void testOddLengthArray() {
+        Integer[] arr = {3, 1, 4, 1, 5};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 1, 3, 4, 5}, arr);
+    }
+
+    @Test
+    public void testArrayWithNegativeNumbers() {
+        Integer[] arr = {-3, -1, -4, -1, -5};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{-5, -4, -3, -1, -1}, arr);
+    }
+
+    @Test
+    public void testArrayWithMixedPositiveAndNegativeNumbers() {
+        Integer[] arr = {3, -1, 4, -1, 5, -9};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{-9, -1, -1, 3, 4, 5}, arr);
+    }
+
+    @Test
+    public void testArrayOfStrings() {
+        String[] arr = {"banana", "apple", "cherry"};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new String[]{"apple", "banana", "cherry"}, arr);
+    }
+
+    @Test
+    public void testArrayWithDuplicateValues() {
+        Integer[] arr = {3, 1, 2, 3, 1, 2};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 1, 2, 2, 3, 3}, arr);
+    }
+
+    @Test
+    public void testAlreadySortedArray() {
+        Integer[] arr = {1, 2, 3, 4, 5};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 2, 3, 4, 5}, arr);
+    }
+
+    @Test
+    public void testReverseSortedArray() {
+        Integer[] arr = {5, 4, 3, 2, 1};
+        Sorter.mergeSortNoRecursion(arr);
+        assertArrayEquals(new Integer[]{1, 2, 3, 4, 5}, arr);
+    }
+
+
+
+    //radix sorts
 
     @Test
     public void atestRadixSortLargeArray() {
