@@ -90,12 +90,11 @@ public class Sorter {
 
 
 
-    private static Random rand = new Random();
-
+    
     public static <T extends Comparable<T>> void quickSort(T[] array) {
         quickSort(array, 0, array.length - 1);
     }
-
+    
     private static <T extends Comparable<T>> void quickSort(T[] array, int low, int high) {
         if (low < high) {
             int pi = partition(array, low, high);
@@ -103,8 +102,9 @@ public class Sorter {
             quickSort(array, pi + 1, high);
         }
     }
-
+    
     private static <T extends Comparable<T>> int partition(T[] array, int low, int high) {
+        Random rand = new Random();
         // Select a random pivot index
         int pivotIndex = low + rand.nextInt(high - low + 1);
         T pivot = array[pivotIndex];

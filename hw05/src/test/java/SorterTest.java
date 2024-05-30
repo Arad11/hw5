@@ -22,6 +22,86 @@ class SorterTest {
     }
 
     @Test
+    public void testPositiveNumbers() {
+        Integer[] array = {3, 6, 8, 10, 1, 2, 1};
+        Integer[] sortedArray = {1, 1, 2, 3, 6, 8, 10};
+        Sorter.quickSort(array);
+        assertArrayEquals(sortedArray, array);
+    }
+
+    // Test case for an array with negative numbers
+    @Test
+    public void testNegativeNumbers() {
+        Integer[] array = {-3, -6, -8, -10, -1, -2, -1};
+        Integer[] sortedArray = {-10, -8, -6, -3, -2, -1, -1};
+        Sorter.quickSort(array);
+        assertArrayEquals(sortedArray, array);
+    }
+
+    // Test case for an empty array
+    @Test
+    public void btestEmptyArray() {
+        Integer[] array = {};
+        Integer[] sortedArray = {};
+        Sorter.quickSort(array);
+        assertArrayEquals(sortedArray, array);
+    }
+
+    // Test case for an array with even number of elements
+    @Test
+    public void testEvenNumberOfElements() {
+        Integer[] array = {10, 7, 8, 9, 1, 5};
+        Integer[] sortedArray = {1, 5, 7, 8, 9, 10};
+        Sorter.quickSort(array);
+        assertArrayEquals(sortedArray, array);
+    }
+
+    // Test case for an array with odd number of elements
+    @Test
+    public void testOddNumberOfElements() {
+        Integer[] array = {10, 7, 8, 9, 1};
+        Integer[] sortedArray = {1, 7, 8, 9, 10};
+        Sorter.quickSort(array);
+        assertArrayEquals(sortedArray, array);
+    }
+
+    // Test case for an array with different types of variables (Strings)
+    @Test
+    public void testStringArray() {
+        String[] array = {"apple", "orange", "banana", "pear", "grape"};
+        String[] sortedArray = {"apple", "banana", "grape", "orange", "pear"};
+        Sorter.quickSort(array);
+        assertArrayEquals(sortedArray, array);
+    }
+
+    // Test case for an array with a large number of elements
+    @Test
+    public void testLargeArray() {
+        int size = 10000;
+        Integer[] array = new Integer[size];
+        Integer[] sortedArray = new Integer[size];
+        Random rand = new Random();
+
+        for (int i = 0; i < size; i++) {
+            array[i] = rand.nextInt(10000);
+            sortedArray[i] = array[i];
+        }
+
+        Arrays.sort(sortedArray);
+        Sorter.quickSort(array);
+        assertArrayEquals(sortedArray, array);
+    }
+
+    // Additional test case for an array with mixed positive and negative numbers
+    @Test
+    public void testMixedPositiveAndNegativeNumbers() {
+        Integer[] array = {3, -1, -4, 6, 8, -7, 2, -5};
+        Integer[] sortedArray = {-7, -5, -4, -1, 2, 3, 6, 8};
+        Sorter.quickSort(array);
+        assertArrayEquals(sortedArray, array);
+    }
+
+    @Test
     void testMergeSortOnMediumArrayWithWideRangeOfValues() {
         Long[] array = randomArray(1024, 0, 1_000_000);
         Sorter.mergeSortNoRecursion(array);
