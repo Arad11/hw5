@@ -157,15 +157,15 @@ public class SortAnalyser {
         ResultPlotter plotter = new ResultPlotter();
         List<Integer> digitWidths = List.of(1, 4, 8, 16, 24);
 
-        // // Map<String, Consumer<Long[]>> sorters = new HashMap<>(Map.of("quicksort", Sorter::quickSort, "mergesort", Sorter::mergeSortNoRecursion));
+        Map<String, Consumer<Long[]>> sorters = new HashMap<>(Map.of("quicksort", Sorter::quickSort, "mergesort", Sorter::mergeSortNoRecursion));
 
-        // for (Integer numBits : digitWidths) {
-        //     sorters.put("radix" + numBits, (arr) -> Sorter.radixSort(arr, numBits));
-        // }
+        for (Integer numBits : digitWidths) {
+            sorters.put("radix" + numBits, (arr) -> Sorter.radixSort(arr, numBits));
+        }
 
-        // for (String sortName : sorters.keySet()) {
-        //     plotter.addLineData(sortName, sorterTest(sorters.get(sortName), numberArraysStream));
-        // }
+        for (String sortName : sorters.keySet()) {
+            plotter.addLineData(sortName, sorterTest(sorters.get(sortName), numberArraysStream));
+        }
 
         List<Experiment.Result> linearTime = linearTimeApprox(params.trialsPerArrayLength(10));
         plotter.addLineData("O(n)", linearTime);
